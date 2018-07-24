@@ -24,3 +24,8 @@
 - [第六篇：函数](python-dir/python10.md)
   - [函数基础](python-dir/python10.md)
   - [函数参数](python-dir/python11.md)
+  - [函数对象](python-dir/python12.md)
+  - [函数嵌套](python-dir/python13.md)
+  - [名称空间与作用域](python-dir/python14.md)
+  - [闭包函数](python-dir/python15.md)
+  - [装饰器](python-dir/python16.md)

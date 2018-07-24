@@ -169,6 +169,7 @@ python中约定俗成：
   ```
 
   - 4）、实参中带**
+
   ```python
   '''
   实参中带**  但凡实参中带** ，先将其打散成关键字实参，然后再考虑传值
@@ -185,4 +186,125 @@ python中约定俗成：
   userinfo(**{'username':'fred','passwd':'1234'})
   用户名：fred
   密码：1234
+  ```
+
+  - 5）、练习
+
+  ```python
+  '''
+  1、写函数，，用户传入修改的文件名，与要修改的内容，执行函数，完文件修改操作
+  '''
+  def replance_file(file_name,old,new):
+      '''
+      修改文件内容
+      :param file_name:要修改的文件
+      :param old: 修改前的的内容
+      :param new: 修改后的内容
+      :return:
+      '''
+      import os
+      with open(file_name, mode='r', encoding='utf8') as f_r, \
+              open('.%s.swap' % file_name, mode='w', encoding='utf8') as f_w:
+          for line in f_r:
+              if line.startswith(old):
+                  line = line.replace(old,new)
+                  f_w.write(line)
+              else:
+                  f_w.write(line)
+
+      os.remove(file_name)
+      os.rename('.%s.swap' %file_name,file_name)
+
+      return old,new
+
+  res=replance_file('src.txt','name','姓名')
+  print(res)
+  ```
+
+  ```python
+  '''
+  2、写函数，计算传入字符串中【数字】、【字母】、【空格] 以及 【其他】的个数
+  '''
+  def result(s):
+      counts={
+          'alpha':0,
+          'digit':0,
+          'space':0,
+          'other':0,
+      }
+
+      for i in s:
+          if i.isalpha():                  # 判断是否为字母
+              counts['alpha']+=1
+          elif i.isdigit():                # 判断是否为数字
+              counts['digit']+=1
+          elif i.isspace():                # 判断是否为空格
+              counts['space']+=1
+          else:
+              counts['other']+=1
+
+      return counts
+
+  res=result('hello 18 age name %%%%&&&')
+  print(res)
+  ```
+
+  ```python
+  '''
+  3、写函数，判断用户传入的对象（字符串、列表、元组）长度是否大于5。
+  '''
+  def judge(*args):
+      result=[]
+      for i in args:
+          if len(i) > 5:
+              result.append(i)
+
+      return result
+
+  res=judge('fred_li',[18,'9you','sa'],('read ','play'))
+  print(res)
+  ```
+
+  ```python
+  '''
+  4、写函数，检查传入列表的长度，如果大于2，那么仅保留前两个长度的内容，并将新内容返回给调用者。
+  '''
+  def new_list(l):
+      if len(l) > 2:
+          return l[0],l[1]
+      else:
+          return l
+
+  res=new_list(['fred','18','read','play'])
+  print(res)
+  ```
+
+  ```python
+  '''
+  5、写函数，检查获取传入列表或元组对象的所有奇数位索引对应的元素，并将其作为新列表返回给调用者。
+  '''
+  def fun(l):
+      return l[::2]
+
+  res=fun(['root','x','/home','this is root','/sbin/nologin'])
+  print(res)
+  ```
+
+  ```python
+  '''
+  6、写函数，检查字典的每一个value的长度,如果大于2，那么仅保留前两个长度的内容，并将新内容返回给调用者。
+  dic = {"k1": "v1v1", "k2": [11,22,33,44]}
+  PS:字典中的value只能是字符串或列表
+  '''
+  def func(dic):
+      d={}
+      for k,v in dic.items():
+          if len(v) > 2:
+              d[k]=v[0:2]
+          else:
+              d[k]=v
+
+      return d
+
+  print(func({'username':'fred','dept':('sa','ceo','cto','coo'),'hobby':['read','music','play','game'],'desc':('friend','father')}))
   ```
